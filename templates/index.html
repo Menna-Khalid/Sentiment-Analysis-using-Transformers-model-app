@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sentiment Analysis App</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #1a0e3f;
+            color: #fff;
+        }
+        .container {
+            background-color: #2e1b64;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.2);
+        }
+        h1 {
+            color: #d0e8ff;
+            font-size: 2.5rem;
+            text-align: center;
+        }
+        .btn-primary, .btn-secondary {
+            border-radius: 8px;
+        }
+        .result-box {
+            background-color: #3d2a7e;
+            padding: 20px;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>Sentiment Analysis App</h1>
+        <form method="POST" action="/analyze">
+            <div class="form-group">
+                <label for="inputText">Enter Text</label>
+                <textarea id="inputText" name="inputText" class="form-control" rows="4" placeholder="Type something here...">{{ input_text }}</textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Analyze Text</button>
+            <button type="submit" formaction="/clear" class="btn btn-secondary">Clear</button>
+        </form>
+
+        {% if sentiment %}
+        <div class="result-box mt-4">
+            <h5>Analysis Result:</h5>
+            <p>Sentiment: {{ sentiment }}</p>
+            <p>Confidence Score: {{ score }}</p>
+        </div>
+        {% endif %}
+
+        {% if error %}
+        <div class="alert alert-danger mt-4">
+            {{ error }}
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
